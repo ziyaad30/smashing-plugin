@@ -11,8 +11,8 @@ if( ! class_exists( 'Smashing_Updater' ) ){
 }
 
 $updater = new Smashing_Updater( __FILE__ );
-$updater->set_username( 'rayman813' );
-$updater->set_repository( 'smashing-updater-plugin' );
+$updater->set_username( 'ziyaad30' );
+$updater->set_repository( 'smashing-plugin' );
 /*
 	$updater->authorize( 'abcdefghijk1234567890' ); // Your auth code goes here for private repos
 */
