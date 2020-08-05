@@ -1,4 +1,5 @@
   <div><br />
+  <?php if ( isset( $_GET['settings-updated'] ) ) { echo "<div class='updated'><p>Settings updated successfully.</p></div>"; } ?>
   <form method="post" action="options.php">
   <?php settings_fields( 'smashing_options_group' ); ?>
   <table cellpadding="3" cellspacing="3">
