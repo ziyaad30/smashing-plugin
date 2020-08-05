@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Smashing Plugin
 	Description: This is for updating your Smashing Plugin to the latest version.
-	Version: 3.1.1
+	Version: 3.1.2
 	Tested: 5.4.2
 	Author: XavierB
 	Author URI: https://www.entertainaholic.com/
@@ -55,8 +55,8 @@ function smashing_options_page()
 	  
 	  <!-- Here are our tabs -->
 	  <nav class="nav-tab-wrapper">
-		  <a href="?page=adsterra" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Dashboard</a>
-		  <a href="?page=adsterra&tab=settings" class="nav-tab <?php if($tab==='settings'):?>nav-tab-active<?php endif; ?>">Settings</a>
+		  <a href="?page=smashing" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Dashboard</a>
+		  <a href="?page=smashing&tab=settings" class="nav-tab <?php if($tab==='settings'):?>nav-tab-active<?php endif; ?>">Settings</a>
 	  </nav>
 	  
 	  <div class="tab-content">
