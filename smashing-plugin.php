@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Smashing Plugin
 	Description: This is for updating your Smashing Plugin to the latest version.
-	Version: 4.0.0
+	Version: 4.0.1
 	Tested: 5.4.2
 	Author: XavierB
 	Author URI: https://www.entertainaholic.com/
@@ -24,8 +24,14 @@ add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'smashing_settin
 function smashing_settings_link( array $links ) 
 {
 	$url = get_admin_url() . "admin.php?page=smashing&tab=settings";
+	
+	//Setting link
 	$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
 	$links[] = $settings_link;
+	
+	//Website link
+	$website_link = '<a href="https://www.entertainaholic.com">Website</a>';
+	$links[] = $website_link;
 	return $links;
 }
 
