@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Smashing Plugin
 	Description: This is for updating your Smashing Plugin to the latest version.
-	Version: 3.1.0
+	Version: 3.1.1
 	Tested: 5.4.2
 	Author: XavierB
 	Author URI: https://www.entertainaholic.com/
@@ -42,5 +42,34 @@ function smashing_options_page()
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-	echo 'Smashing Options Page!';
+	
+	//Get the active tab from the $_GET param
+	$default_tab = null;
+	$tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
+?>
+<!-- Our admin page content should all be inside .wrap -->
+  <div class="wrap">
+	  
+	  <!-- Print the page title -->
+	  <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+	  
+	  <!-- Here are our tabs -->
+	  <nav class="nav-tab-wrapper">
+		  <a href="?page=adsterra" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Dashboard</a>
+		  <a href="?page=adsterra&tab=settings" class="nav-tab <?php if($tab==='settings'):?>nav-tab-active<?php endif; ?>">Settings</a>
+	  </nav>
+	  
+	  <div class="tab-content">
+		  <?php switch($tab) :
+	case 'settings':
+	include 'adsterra_opts.php';
+	break;
+	default:
+	include 'stats.php';
+	break;
+	endswitch;
+		  ?>
+	  </div>
+</div>
+<?php
 }
