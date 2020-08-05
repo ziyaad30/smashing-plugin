@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Smashing Plugin
 	Description: This is for updating your Wordpress plugin.
-	Version: 1.0.0
+	Version: 1.0.4
 	Author: XavierB
 	Author URI: http://www.matthewray.com
 */
