@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Smashing Plugin
 	Description: This is for updating your Smashing Plugin to the latest version.
-	Version: 3.1.3
+	Version: 3.1.4
 	Tested: 5.4.2
 	Author: XavierB
 	Author URI: https://www.entertainaholic.com/
@@ -20,8 +20,8 @@ $updater->set_repository( 'smashing-plugin' );
 $updater->initialize();
 
 // Add setting link under plugins
-add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'apd_settings_link' );
-function apd_settings_link( array $links ) 
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'smashing_settings_link' );
+function smashing_settings_link( array $links ) 
 {
 	$url = get_admin_url() . "admin.php?page=smashing&tab=settings";
 	$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
