@@ -18,7 +18,16 @@ $updater->set_repository( 'smashing-plugin' );
 	$updater->authorize( 'abcdefghijk1234567890' ); // Your auth code goes here for private repos
 */
 $updater->initialize();
-	
+
+// Add setting link under plugins
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'apd_settings_link' );
+function apd_settings_link( array $links ) 
+{
+	$url = get_admin_url() . "admin.php?page=smashing&tab=settings";
+	$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
+	$links[] = $settings_link;
+	return $links;
+}
 
 // Register the fields
 function smashing_register_settings() {
@@ -62,12 +71,15 @@ function smashing_options_page()
 	  <div class="tab-content">
 		  <?php switch($tab) :
 	case 'settings':
-	//include 'smashing_opts.php';
-	echo 'Option/Settings Page';
+	
+	include 'smashing_opts.php';
+	
 	break;
 	default:
+	
 	//include 'stats.php';
 	echo 'Dashboard Page';
+	
 	break;
 	endswitch;
 		  ?>
