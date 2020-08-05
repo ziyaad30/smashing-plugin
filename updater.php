@@ -52,8 +52,16 @@ class Smashing_Updater {
 	        if( $this->authorize_token ) { // Is there an access token?
 	            $request_uri = add_query_arg( 'access_token', $this->authorize_token, $request_uri ); // Append it
 	        }
+		    
+		$args = array(
+			"headers" => array(
+				"Authorization" => "token {$this->authorization_token}"
+			)
+		);
+		$response = json_decode( wp_remote_retrieve_body( wp_remote_get( $request_uri, $args ) ), true );
 
-	        $response = json_decode( wp_remote_retrieve_body( wp_remote_get( $request_uri ) ), true ); // Get JSON and parse it
+
+	        //$response = json_decode( wp_remote_retrieve_body( wp_remote_get( $request_uri ) ), true ); // Get JSON and parse it
 
 	        if( is_array( $response ) ) { // If it is an array
 	            $response = current( $response ); // Get the first item
