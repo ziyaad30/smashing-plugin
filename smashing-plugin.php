@@ -77,8 +77,7 @@ function smashing_options_page()
 	break;
 	default:
 	
-	//include 'stats.php';
-	echo 'Dashboard Page';
+	include 'stats.php';
 	
 	break;
 	endswitch;
