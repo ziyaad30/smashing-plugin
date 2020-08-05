@@ -1,10 +1,10 @@
 <?php
 /*
 	Plugin Name: Smashing Plugin
-	Description: This is for updating your Wordpress plugin.
-	Version: 3.0.0
+	Description: This is for updating your Smashing Plugin to the latest version.
+	Version: 3.0.1
 	Author: XavierB
-	Author URI: http://www.matthewray.com
+	Author URI: https://www.entertainaholic.com/
 */
 if( ! class_exists( 'Smashing_Updater' ) ){
 	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
