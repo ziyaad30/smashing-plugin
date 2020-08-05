@@ -62,10 +62,12 @@ function smashing_options_page()
 	  <div class="tab-content">
 		  <?php switch($tab) :
 	case 'settings':
-	include 'adsterra_opts.php';
+	//include 'smashing_opts.php';
+	echo 'Option/Settings Page';
 	break;
 	default:
-	include 'stats.php';
+	//include 'stats.php';
+	echo 'Dashboard Page';
 	break;
 	endswitch;
 		  ?>
