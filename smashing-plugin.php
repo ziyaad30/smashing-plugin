@@ -4,8 +4,11 @@
 	Description: This is for updating your Smashing Plugin to the latest version.
 	Version: 4.0.1
 	Tested: 5.4.2
+	Requires at least: 5.4.2
 	Author: XavierB
 	Author URI: https://www.entertainaholic.com/
+	License: GPL-2.0+
+	License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 */
 if( ! class_exists( 'Smashing_Updater' ) ){
 	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
