@@ -16,15 +16,20 @@ if(curl_error($ch)) {
 echo 'error:' . curl_error($ch);
 };
 curl_close($ch);
+
 $array = json_decode($json, true);
-
 $result = $array['items'];
-
-
 $data_points = array();
+
+$totalCTR = '0';
+$totalCPM = '0';
+$totalClicks = '0';
+$totalImpressions = '0';
+$totalRevenue = '0';
 
 foreach ($result as $arr) 
 {
+    
     $date = strtotime($arr['date']);
     $chart_date = date('Y, m, d, G, i, s', strtotime($arr['date']));
     $javaScriptTimestamp = $date * 1000;
@@ -47,6 +52,7 @@ foreach ($result as $arr)
                      'revenue' => $totalRevenue,
                      'clicks' => $totalClicks
                 );
+    
 }
 
 echo json_encode($data_points, JSON_NUMERIC_CHECK);
