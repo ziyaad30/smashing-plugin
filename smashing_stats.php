@@ -71,15 +71,7 @@ $today = date("Y-m-d");
 <div>
 <br />
   <table width="100%" border="0" cellspacing="5" cellpadding="5">
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td colspan="2">
-	  <h1>
-  	  <img src="<?php echo plugins_url( 'images/impressions.png', __FILE__ );?>" width="34" height="36" align="absmiddle" /> Statistics
-	  </h1>
-	  </td>
-    </tr>
+    
     <tr>
       <td width="25%">&nbsp;</td>
       <td width="25%">&nbsp;</td>
@@ -128,12 +120,16 @@ $today = date("Y-m-d");
 
 
 <h1>
-  <img src="<?php echo plugins_url( 'images/graph.png', __FILE__ );?>" width="34" height="36" align="absmiddle" /> Graph Report
-</h1>
+  <img src="<?php echo plugins_url( 'images/impressions.png', __FILE__ );?>" width="34" height="36" align="absmiddle" /> Statistics </h1>
 <div class="custom_div_white">
-
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div id="chart" align="center" style="width:auto; height:300px;"></div> </td>
+  </tr>
+</table>
 </div>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -181,4 +177,85 @@ load_stats_last_month();
 load_stats_this_month();
 load_stats_this_year();
 });
+</script>
+<script>
+    // Visualization API with the 'corechart' package.
+    google.charts.load('visualization', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawLineChart);
+
+    function drawLineChart() {
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+                },
+            url: "<?php echo plugins_url( 'api.php', __FILE__ );?>?id=<?php print $api_key?>&start_day=<?php echo $first_day_of_year;?>&end_day=<?php echo $end_day_this_month;?>",
+            beforeSend: function(){
+                $("#chart").html('<img src="https://thumbs.gfycat.com/PepperyMediumBrahmancow-size_restricted.gif">');
+            },
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var arrSales = [['Month', 'Revenue', 'Impressions']];    // Define an array and assign columns for the chart.
+
+                // Loop through each data and populate the array.
+                $.each(data, function (index, value) {
+                    arrSales.push([new Date(value.date), value.value, value.daily_impressions]);
+                });
+
+                // Set chart Options.
+                var options = {
+                    curveType: 'function',
+                    // y-axis settings
+                    vAxes: 
+                    {
+                        0: 
+                        {
+                            title: 'Revenue',
+                            format: 'currency'
+                        },
+                        1:
+                        {
+                            title: 'Impressions',
+                            format: 'decimal'
+                        }
+                    },
+                    // map series
+                    series: 
+                    {
+                        0: 
+                        {
+                            targetAxisIndex: 0
+                        },
+                        1: 
+                        {
+                            targetAxisIndex: 1
+                        }
+                    },
+                    hAxis: {
+                        format: 'dd MMM yy',
+                        gridlines:{color:'#fff'},
+                        minorGridlines:{color:'#fff'},
+                        textStyle: {color: '#7a7d80', fontSize: 12}
+                    },
+                    vAxis: {minorGridlines:{color:'#fff'}, textStyle: {color: '#7a7d80', fontSize: 12}},
+                    legend: { position: 'bottom', textStyle: { color: '#555', fontSize: 14} },
+                    pointSize: 5
+                };
+
+                // Create DataTable and add the array to it.
+                var figures = google.visualization.arrayToDataTable(arrSales);
+                
+                var formatter = new google.visualization.DateFormat({pattern: 'dd MMM yy'});
+                formatter.format(figures, 0);
+
+                // Define the chart type (LineChart) and the container (a DIV in our case).
+                var chart = new google.visualization.LineChart(document.getElementById('chart'));
+                chart.draw(figures, options, formatter);      // Draw the chart with Options.
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('Got an Error');
+            }
+        });
+    }
 </script>
