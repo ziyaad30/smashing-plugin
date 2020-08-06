@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Smashing Plugin
 	Description: This is for updating your Smashing Plugin to the latest version.
-	Version: 4.0.3
+	Version: 4.1.0
 	Tested: 5.4.2
 	Requires at least: 5.4.2
 	Author: XavierB
